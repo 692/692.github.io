@@ -695,10 +695,10 @@
   vertical-align: middle;
 }
 .header a.extra {
-  color: #aaa;
-  margin-left: 1em;
+  color: #607B8B;
+  margin-left: 0em;
 }
 
 .header a.extra:hover {
-  color: #a00;
+  color: #0000CD;
 }
