@@ -25,7 +25,7 @@
             var request = new ActiveXObject("Microsoft.XMLHTTP");
         }
         request.onreadystatechange = render;
-        var path = "?/blog/index.html";
+        var path = "/?/blog/";
         if (location.href.indexOf('?') > 0) {
             path = location.href.substring(location.href.indexOf('?')+1);
         }
