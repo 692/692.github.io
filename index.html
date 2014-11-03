@@ -7,7 +7,7 @@
             location = location.href.replace("http:", "https:", 1);
         }
     </script>
-    <title>易观设计</title>
+    <title>{{ post.title }}</title>
     <script src="marked.js"></script>
     <link rel="stylesheet" href="github-markdown.css">
   </head>
@@ -37,7 +37,7 @@
                     if (firstline.indexOf('#') == 0) {
                       document.title += ' ' + firstline.replace(/#*/, '').replace(/\s+/, '');
                     } else {
-                      document.title += '-首页';
+                      document.title += '-易观设计';
                     }
                     document.getElementById("content").innerHTML = marked(request.responseText);
                 } else {
