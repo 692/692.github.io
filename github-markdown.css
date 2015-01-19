@@ -1,13 +1,13 @@
-#gotop{ 
+#gotop{ FONT-SIZE: 20pt;
 	display:block;  
-	width:60px; 
-	height:60px;
+	width:40px; 
+	height:40px;
 	position:fixed;  
-	bottom:40px;  
+	bottom:20px;  
 	right:40px; 
 	border-radius:10px 10px 10px 10px;   
 	text-decoration:none;  
-	background-color:#999999;     
+	background-color:#BCD2EE;     
 }
 
 @font-face {
