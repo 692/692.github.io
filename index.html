@@ -8,68 +8,41 @@
         }
     </script>
     <title>易观设计</title>
-    <script src="marked.js"></script>
-    <link rel="stylesheet" href="github-markdown.css">
   </head>
-  <body style="min-width:200px; max-width:900px; margin:auto; padding:16px;">
+  <body>
     <div id="content"></div>
     <script>
-    function b64decode(e) {
-        var key = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
-        var t = "";
-        var n, r, i;
-        var s, o, u, a;
-        var f = 0;
-        e = e.replace(/[^A-Za-z0-9\+\/\=]/g, "");
-        while (f < e.length) {
-            s = key.indexOf(e.charAt(f++));
-            o = key.indexOf(e.charAt(f++));
-            u = key.indexOf(e.charAt(f++));
-            a = key.indexOf(e.charAt(f++));
-            n = s << 2 | o >> 4;
-            r = (o & 15) << 4 | u >> 2;
-            i = (u & 3) << 6 | a;
-            t = t + String.fromCharCode(n);
-            if (u != 64) {
-                t = t + String.fromCharCode(r)
-            }
-            if (a != 64) {
-                t = t + String.fromCharCode(i)
-            }
-        }
-        var t2 = "";
-        var m = 0;
-        var r2 = c1 = c2 = 0;
-        while (m < t.length) {
-            r2 = t.charCodeAt(m);
-            if (r2 < 128) {
-                t2 += String.fromCharCode(r2);
-                m++
-            } else if (r2 > 191 && r2 < 224) {
-                c2 = t.charCodeAt(m + 1);
-                t2 += String.fromCharCode((r2 & 31) << 6 | c2 & 63);
-                m += 2
-            } else {
-                c2 = t.charCodeAt(m + 1);
-                c3 = t.charCodeAt(m + 2);
-                t2 += String.fromCharCode((r2 & 15) << 12 | (c2 & 63) << 6 | c3 & 63);
-                m += 3
-            }
-        }
-        return t2
-    }
-
-    function render(readme) {
-        text = b64decode(readme['data']['content']);
-        document.title = ' ' + text.split("\n")[0].split(/\s+/)[1];
-        document.getElementById("content").innerHTML = marked(text);
-    }
-
     (function() {
-        var script   = document.createElement("script");
-        script.type  = "text/javascript";
-        script.src   = "https://api.github.com/repos/692/blog/readme?callback=render";
-        document.body.appendChild(script);
+        if (location.href.indexOf('https:') < 0) {
+            return;
+        }
+        if (window.XMLHttpRequest) {
+            var request = new XMLHttpRequest();
+        } else {
+            var request = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        request.onreadystatechange = render;
+        var path = "/blog/index.html";
+        if (location.href.indexOf('?') > 0) {
+            path = location.href.substring(location.href.indexOf('?')+1);
+        }
+        request.open('GET', path, true);
+        request.send();
+        function render() {
+            if (request.readyState == 4) {
+                if (request.status >= 200 && request.status < 400){
+                    var firstline = request.responseText.split("\n")[0];
+                    if (firstline.indexOf('#') == 0) {
+                      document.title += ' ' + firstline.replace(/#*/, '').replace(/\s+/, '');
+                    } else {
+                      document.title += '.';
+                    }
+                    document.getElementById("content").innerHTML = marked(request.responseText);
+                } else {
+                    location = 'https://github.com/692/692.github.io';
+                }
+            }
+        }
     })();
     </script>
 <a id="gotop" href="#">   
