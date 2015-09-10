@@ -32,7 +32,7 @@ var _hmt = _hmt || [];
             var request = new ActiveXObject("Microsoft.XMLHTTP");
         }
         request.onreadystatechange = render;
-        var path = "/blog/index.html";
+        var path = "/bookmarks/index.html";
         if (location.href.indexOf('?') > 0) {
             path = location.href.substring(location.href.indexOf('?')+1);
         }
@@ -49,7 +49,7 @@ var _hmt = _hmt || [];
                     }
                     document.getElementById("content").innerHTML = marked(request.responseText);
                 } else {
-                    location = 'https://692.github.io/bookmarks/';
+                    location = 'https://692.github.io/';
                 }
             }
         }
