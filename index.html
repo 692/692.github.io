@@ -1,0 +1,52 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+    <script>
+        if (location.href.indexOf("http://") == 0) {
+            location = location.href.replace("http:", "https:", 1);
+        }
+    </script>
+    <title>易观设计</title>
+    <script src="marked.js"></script>
+  </head>
+  <body>
+    <div id="content"></div>
+    <script>
+    (function() {
+        if (location.href.indexOf('https:') < 0) {
+            return;
+        }
+        if (window.XMLHttpRequest) {
+            var request = new XMLHttpRequest();
+        } else {
+            var request = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        request.onreadystatechange = render;
+        var path = "/blog/index.html";
+        if (location.href.indexOf('?') > 0) {
+            path = location.href.substring(location.href.indexOf('?')+1);
+        }
+        request.open('GET', path, true);
+        request.send();
+        function render() {
+            if (request.readyState == 4) {
+                if (request.status >= 200 && request.status < 400){
+                    var firstline = request.responseText.split("\n")[0];
+                    if (firstline.indexOf('#') == 0) {
+                      document.title += ' ' + firstline.replace(/#*/, '').replace(/\s+/, '');
+                    } else {
+                      document.title += '.';
+                    }
+                    document.getElementById("content").innerHTML = marked(request.responseText);
+                } else {
+                    location = 'https://692.github.io/';
+                }
+            }
+        }
+    })();
+    </script>
+    <script type="text/javascript" src="http://692.github.io/code/jquery.min.js"></script>
+<script type="text/javascript" src="http://692.github.io/code/arrow6.js"></script>
+  </body>
+</html>
