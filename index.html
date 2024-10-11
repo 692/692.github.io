@@ -8,7 +8,7 @@
             location = location.href.replace("http:", "https:", 1);
         }
     </script>
-    <title>易观设计</title>
+    <title>MGT</title>
     <script src="marked.js"></script>
   </head>
   <body>
@@ -24,7 +24,7 @@
             var request = new ActiveXObject("Microsoft.XMLHTTP");
         }
         request.onreadystatechange = render;
-        var path = "/blog/";
+        var path = "/bk";
         if (location.href.indexOf('?') > 0) {
             path = location.href.substring(location.href.indexOf('?')+1);
         }
@@ -41,7 +41,7 @@
                     }
                     document.getElementById("content").innerHTML = marked(request.responseText);
                 } else {
-                    location = 'https://692.github.io/';
+                    location = '';
                 }
             }
         }
